@@ -7,4 +7,4 @@
 * Fix tasks. Currently it displays all tasks regardless of whether the user has entered their passwords.
 * Grey out quests/tasks that are completed.
 * Fix the hyperlink.
-* Durp
+* Fix tha scrollers man
