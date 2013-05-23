@@ -144,8 +144,8 @@ public class FileReader {
 						e.printStackTrace();
 					}
 				}
-				if (params.length == 3) { tasks.add(new Task(params[0],params[1],State.fromString(params[2]))); }
-				else { tasks.add(new Task(params[0],params[1],params[2],State.fromString(params[3]))); }
+				if (params.length == 3) { tasks.add(new Task(object, params[0], params[1], State.fromString(params[2]))); }
+				else { tasks.add(new Task(object, params[0], params[1], params[2], State.fromString(params[3]))); }
 			}
 		}
 		return object;
@@ -173,7 +173,7 @@ public class FileReader {
 			}
 		}
 		object.setTasks(new Task[] {
-				new Task(object.getVideoLink(), object.getName(), object.getPassword(), object.getState()) 
+				new Task(object ,object.getVideoLink(), object.getName(), object.getPassword(), object.getState()) 
 				});
 		
 		return object;

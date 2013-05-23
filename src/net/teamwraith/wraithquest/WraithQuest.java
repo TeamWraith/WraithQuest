@@ -20,10 +20,8 @@ public class WraithQuest {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Task[] tasks = QuestReader.getPasswordMatches(bufRead.readLine());
-					for (int i=0; i < tasks.length; i++) {
-						System.out.println(tasks[i]);
-					}
+					QuestReader.getPasswordMatches(bufRead.readLine());
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
