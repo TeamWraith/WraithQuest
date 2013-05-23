@@ -1,0 +1,8 @@
+type=character
+state=started
+name=Derpyman
+password=derp
+links={
+http://www.youtube.com/watch?v=zyTCtbYNzRg#started
+http://www.youtube.com/watch?v=zyTCtRoNzRg#disabled
+}

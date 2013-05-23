@@ -1,7 +1,8 @@
 type=quest
+state=not started
 name=Collect 10 Bear Heads
 description=The farmer wants to make a bear head stew.<p>Collect ten bear heads for him.
 tasks={
-Collect 10 bear heads.#bear
-www.youtube.com/v?=EXAMPLE#Deliver them to the farmer.#pear
+Collect 10 bear heads.#bear#started
+www.youtube.com/v?=EXAMPLE#Deliver them to the farmer.#pear#failed
 }
