@@ -30,27 +30,17 @@ public class QuestReader {
 					if (file.getPassword().equals(pass) && 
 						getTaskArray(file)[i].getState() != State.DISABLED) {
 						
-						taskMatches.add(getTaskArray(file)[i]);
+						taskMatches.add((Task) getTaskArray(file)[i]);
 						
 						System.out.println("Task: "+ getTaskArray(file)[i].getTaskPoint() +" was added.");
 						System.out.println(getTaskArray(file)[i].getState());
 					}
 					
-				} else if (file.getFileType() == FileType.CUTSCENE && file.getState() != State.DISABLED) {
+				} else if (file.getState() != State.DISABLED) {
 					if (getTaskArray(file)[i].getPassword().equals(pass) && 
 						getTaskArray(file)[i].getState() != State.DISABLED) {
 							
-						taskMatches.add(getTaskArray(file)[i]);
-						
-						System.out.println("Task: "+ getTaskArray(file)[i].getTaskPoint() +" was added.");
-						System.out.println(getTaskArray(file)[i].getState());
-					}
-					
-				} else if (file.getFileType() == FileType.QUEST && file.getState() != State.DISABLED) {
-					if (getTaskArray(file)[i].getPassword().equals(pass) && 
-						getTaskArray(file)[i].getState() != State.DISABLED) {
-						
-						taskMatches.add(getTaskArray(file)[i]);
+						taskMatches.add((Task) getTaskArray(file)[i]);
 						
 						System.out.println("Task: "+ getTaskArray(file)[i].getTaskPoint() +" was added.");
 						System.out.println(getTaskArray(file)[i].getState());

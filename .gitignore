@@ -1,0 +1,7 @@
+bin
+.settings
+*.jar
+*.wq
+.classpath
+.metadata
+wbp-meta

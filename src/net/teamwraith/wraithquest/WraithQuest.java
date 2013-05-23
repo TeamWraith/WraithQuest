@@ -14,12 +14,15 @@ public class WraithQuest {
 	static InputStreamReader istream = new InputStreamReader(System.in) ;
     static BufferedReader bufRead = new BufferedReader(istream) ;
 	
+   
+    
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					for (Task task : QuestReader.getPasswordMatches(bufRead.readLine()) ) {
-						System.out.println(task);
+					Task[] tasks = QuestReader.getPasswordMatches(bufRead.readLine());
+					for (int i=0; i < tasks.length; i++) {
+						System.out.println(tasks[i]);
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
