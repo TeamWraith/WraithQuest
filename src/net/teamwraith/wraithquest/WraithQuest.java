@@ -20,7 +20,7 @@ public class WraithQuest {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					QuestReader.getPasswordMatches(bufRead.readLine());
+					new GUIBuild();
 					
 				} catch (Exception e) {
 					e.printStackTrace();

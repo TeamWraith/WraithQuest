@@ -8,10 +8,9 @@ import net.teamwraith.wraithquest.gui.main.MainFrame;
 public class GUIBuild {
 	
 	//main window
-	private MainFrame mainFrame;
+	static MainFrame mainFrame;
 
 	public GUIBuild(){
 		mainFrame = new MainFrame();
 	}
-		public MainFrame getMainFrame() { return mainFrame; }
 }

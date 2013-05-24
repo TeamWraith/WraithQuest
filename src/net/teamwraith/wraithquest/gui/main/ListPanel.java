@@ -1,49 +1,58 @@
 package net.teamwraith.wraithquest.gui.main;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.io.File;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import net.teamwraith.wraithquest.files.WraithFile;
-import net.teamwraith.wraithquest.files.link.Quest;
 
 public class ListPanel extends JPanel{
 
-	private JList 	activeQuests = new JList(), 
-					finishedQuests = new JList();
+	private JScrollPane activeQuestsPane = new JScrollPane(
+			JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, 
+			JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED),
+			
+			finishedQuestsPane = new JScrollPane(
+			JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, 
+			JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	
+	private JList<WraithFile> 	activeQuests = new JList<WraithFile>(), 
+					finishedQuests = new JList<WraithFile>();
 	
 	/**
-	 * @param args
+	 * 
 	 */
 	public ListPanel() {
 		setLayout(new BorderLayout());
-		setBackground(Color.GRAY);
-		add(activeQuests, BorderLayout.CENTER);
-		add(finishedQuests, BorderLayout.SOUTH);
+		add(activeQuestsPane, BorderLayout.CENTER);
+		add(finishedQuestsPane, BorderLayout.SOUTH);
+		activeQuestsPane.setViewportView(activeQuests);
+		finishedQuestsPane.setViewportView(this.finishedQuests);
+		
 	}
 	
-	public JList getActiveQuests() {
+	public JList<WraithFile> getActiveQuests() {
 		return activeQuests;
 	}
-	public void setActiveQuests(WraithFile[] activeQuests) {
-		DefaultListModel listModel = new DefaultListModel();
-		for (WraithFile file : activeQuests) {
-			
+	
+	public void setActiveQuests(WraithFile[] wraithFiles) {
+		DefaultListModel<WraithFile> listModel = new DefaultListModel<WraithFile>();
+		
+		for (WraithFile file : wraithFiles) {
+	
 			listModel.addElement(file);
 		}
-		this.activeQuests.setModel(listModel);
+		activeQuests.setModel(listModel);
 	}
 	
-	public JList getFinishedQuests() {
+	public JList<WraithFile> getFinishedQuests() {
 		return finishedQuests;
 	}
 	public void setFinishedQuests(WraithFile[] wraithFiles) {
-		DefaultListModel listModel = new DefaultListModel();
+		DefaultListModel<WraithFile> listModel = new DefaultListModel<WraithFile>();
 		for (WraithFile file : wraithFiles) {
 			listModel.addElement(file);
 		}

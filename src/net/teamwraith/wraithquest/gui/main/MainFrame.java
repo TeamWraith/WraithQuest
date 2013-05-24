@@ -46,10 +46,10 @@ public class MainFrame extends JFrame {
 	}
 
 	public void setListPanelActive() {
-		this.listPanel.setActiveQuests(FileReader.getWraithFileArray(State.NOT_STARTED, FileType.QUEST));
+		this.listPanel.setActiveQuests(FileReader.getWraithFileArray(State.STARTED, FileType.QUEST));
 	}
 	public void setListPanelFinished(ListPanel listPanel) {
-		this.listPanel.setFinishedQuests(FileReader.getWraithFileArray(State.NOT_STARTED, FileType.QUEST));
+		this.listPanel.setFinishedQuests(FileReader.getWraithFileArray(State.COMPLETED, FileType.QUEST));
 	}
 
 
