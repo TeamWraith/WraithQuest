@@ -37,8 +37,8 @@ public class MainFrame extends JFrame {
 		JPanel contentPane = new JPanel();
 		setTitle("Wraith Questing - " + project);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(display.width/2 - 256, display.height/2 - 320, 520, 600);
-		setMinimumSize(new Dimension(520, 600));
+		setBounds(display.width/2 - 256, display.height/2 - 320, 530, 600);
+		setMinimumSize(new Dimension(530, 600));
 		setContentPane(contentPane);
 		setJMenuBar(new MenuBar());
 		contentPane.setLayout(new BorderLayout());
