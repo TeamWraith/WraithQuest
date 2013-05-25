@@ -38,12 +38,16 @@ public class ListPanel extends JPanel{
 		setLayout(new GridBagLayout());
 		
 		activeQuestsPane.setPreferredSize(new Dimension(250, 300));
-		finishedQuestsPane.setPreferredSize(new Dimension(250, 200));
+		finishedQuestsPane.setPreferredSize(new Dimension(250, 120));
 		
+		gbc.fill = GridBagConstraints.BOTH;
+		gbc.weighty = 0;
 		add(new JLabel("Active quests:"), gbc);
 		gbc.gridy=1;
+		gbc.weighty = 1;
 		add(activeQuestsPane, gbc);
 		gbc.gridy=2;
+		gbc.weighty = 0;
 		add(new JLabel("Finished quests:"), gbc);
 		gbc.gridy=3;
 		add(finishedQuestsPane, gbc);

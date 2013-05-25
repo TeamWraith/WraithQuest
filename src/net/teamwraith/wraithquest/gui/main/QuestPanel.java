@@ -16,8 +16,8 @@ import net.teamwraith.wraithquest.files.link.Task;
 public class QuestPanel extends JPanel{
 
 	private JTextField 	
-		pass = new JTextField(15),
-		link = new JTextField(15);
+		pass = new JTextField(18),
+		link = new JTextField(18);
 	
 	private JList<Task> tasks = new JList<Task>();
 	
@@ -48,19 +48,26 @@ public class QuestPanel extends JPanel{
 	public QuestPanel() {
 		setLayout(new GridBagLayout());
 		setBackground(Color.LIGHT_GRAY);
+		gbc.anchor = GridBagConstraints.FIRST_LINE_START;
+		gbc.fill = GridBagConstraints.HORIZONTAL;
+		
 		add(new JLabel("Password: "), gbc);
 		add(pass, gbc);
-		gbc.gridy=1;
+		gbc.gridy = 1;
 		add(new JLabel("Link: "), gbc);
 		add(link, gbc);
-		gbc.fill = GridBagConstraints.HORIZONTAL;
+		gbc.fill = GridBagConstraints.BOTH;
 		gbc.gridwidth = 2;
 		gbc.ipady = 100;
-		gbc.gridy=2;
+		gbc.gridy = 2;
 		add(descriptionPane, gbc);
-		gbc.gridy=3;
+		gbc.weightx = 1;
+		gbc.weighty = 1;
+		gbc.gridy = 3;
 		add(tasksPane, gbc);
-		gbc.gridy=4;
+		gbc.weightx = 0;
+		gbc.weighty = 0;
+		gbc.gridy = 4;
 		add(detailsPane, gbc);
 		
 	}
