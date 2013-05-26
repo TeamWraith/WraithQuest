@@ -1,8 +1,6 @@
 package net.teamwraith.wraithquest.gui.elements;
 
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -13,8 +11,9 @@ import javax.swing.JSeparator;
 @SuppressWarnings("serial")
 public class MenuBar extends JMenuBar {
 	
-	private JMenu file = new JMenu("File");
-	private JMenu help = new JMenu("Help");
+	private JMenu 
+		file = new JMenu("File"),
+		help = new JMenu("Help");
 	
 	// File menu
 	private JMenuItem newDialogue =  new JMenuItem("New Dialogue"); 
@@ -56,7 +55,6 @@ public class MenuBar extends JMenuBar {
 	
 	public JMenuItem getAbout() { return about; }
 	
-	/* separates menu, duh */
 	public class MenuSeparator extends JSeparator {
 		
 		public MenuSeparator(Color color) {
@@ -65,13 +63,6 @@ public class MenuBar extends JMenuBar {
 		
 	}
 	
-	private class FileListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			
-		}
-	}
-
 }
 
 

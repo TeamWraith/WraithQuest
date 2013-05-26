@@ -2,13 +2,10 @@ package net.teamwraith.wraithquest.files;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import net.teamwraith.wraithquest.files.link.Task;
 import net.teamwraith.wraithquest.files.link.WraithFile;
-import net.teamwraith.wraithquest.files.link.WraithFile.FileType;
 import net.teamwraith.wraithquest.files.link.WraithFile.State;
-
 
 public class QuestReader {
 
@@ -48,8 +45,7 @@ public class QuestReader {
 		List<Task> taskMatches = new ArrayList<Task>();
 		for (WraithFile file : FileReader.getWraithFileArray()) {
 			for (Task task : getTaskArray(file)) {
-				if (task.getPassword().equals(pass) &&
-					task.getState() != State.DISABLED) {
+				if (task.getPassword().equals(pass) && task.getState() != State.DISABLED) {
 					taskMatches.add(task);
 				}
 			}

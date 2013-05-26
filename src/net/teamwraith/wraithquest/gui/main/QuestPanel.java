@@ -21,10 +21,9 @@ import javax.swing.JTextField;
 
 import net.teamwraith.wraithquest.files.QuestReader;
 import net.teamwraith.wraithquest.files.TaskReader;
-import net.teamwraith.wraithquest.files.link.Quest;
 import net.teamwraith.wraithquest.files.link.Task;
-import net.teamwraith.wraithquest.files.link.WraithFile;
 
+@SuppressWarnings("serial")
 public class QuestPanel extends JPanel {
 
 	private JTextField 	
@@ -114,13 +113,13 @@ public class QuestPanel extends JPanel {
 	private class PasswordFocusListener extends FocusAdapter {
 		@Override
 		public void focusGained(FocusEvent e) {
-			pass.setFont();
+			pass.setFont(font01);
 		}
 		
 		@Override
 		public void focusLost(FocusEvent e) {
 			pass.setFocusable(true);
-			pass.setFont();
+			pass.setFont(font02);
 			for (Task task : QuestReader.getPasswordMatches(pass.getText())) {
 				TaskReader.openRelated(task);
 			}
