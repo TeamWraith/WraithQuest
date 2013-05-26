@@ -8,9 +8,13 @@ import net.teamwraith.wraithquest.gui.main.MainFrame;
 public class GUIBuild {
 	
 	//main window
-	static MainFrame mainFrame;
+	private static final MainFrame mainFrame = new MainFrame();
 
 	public GUIBuild(){
-		mainFrame = new MainFrame();
+		//TODO Have the project/program(etc. "Minecraft") name in these parameters.
+	}
+	
+	public static MainFrame getMainFrame() {
+		return mainFrame;
 	}
 }

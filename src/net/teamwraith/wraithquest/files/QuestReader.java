@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import net.teamwraith.wraithquest.files.WraithFile.FileType;
-import net.teamwraith.wraithquest.files.WraithFile.State;
 import net.teamwraith.wraithquest.files.link.Task;
+import net.teamwraith.wraithquest.files.link.WraithFile;
+import net.teamwraith.wraithquest.files.link.WraithFile.FileType;
+import net.teamwraith.wraithquest.files.link.WraithFile.State;
 
 
 public class QuestReader {
@@ -23,18 +24,20 @@ public class QuestReader {
 	/**
 	 * 
 	 * @param questObject - The object in which the tasks are.
-	 * @param taskstate - Makes the method search only for the tasks with the specific state.
+	 * @param taskstate - Makes the method search only for the tasks with theese specific states.
 	 * @return An array of tasks with the specific state
 	 */
-	public static Task[] getTaskArray(WraithFile questObject, State taskstate) {
+	public static Task[] getTaskArray(WraithFile questObject, State... taskstate) {
 		List<Task> taskMatches = new ArrayList<Task>();
 		
 		for (Task task : questObject.getTasks()) {
-			if (task.getState() == taskstate) {
-				taskMatches.add(task);
+			for (State state : taskstate) {
+				if (task.getState() == state) {
+					taskMatches.add(task);
+				}
 			}
 		}
-		return questObject.getTasks();
+		return taskMatches.toArray(new Task[taskMatches.size()]);
 	}
 	
 	/**
@@ -45,13 +48,9 @@ public class QuestReader {
 		List<Task> taskMatches = new ArrayList<Task>();
 		for (WraithFile file : FileReader.getWraithFileArray()) {
 			for (Task task : getTaskArray(file)) {
-				
-				if (file.getState() != State.DISABLED) {
-					if (task.getPassword().equals(pass) &&
-						task.getState() != State.DISABLED) {
-						taskMatches.add(task);
-					}
-					
+				if (task.getPassword().equals(pass) &&
+					task.getState() != State.DISABLED) {
+					taskMatches.add(task);
 				}
 			}
 		}

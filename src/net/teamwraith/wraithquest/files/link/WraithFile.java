@@ -1,6 +1,5 @@
-package net.teamwraith.wraithquest.files;
+package net.teamwraith.wraithquest.files.link;
 
-import net.teamwraith.wraithquest.files.link.Task;
 
 public class WraithFile {
 
@@ -16,11 +15,11 @@ public class WraithFile {
 	 * @author Stektpotet
 	 */
 	public static enum State {
-		 DISABLED ("disabled"), 
-		 NOT_STARTED ("not started"), 
-		 STARTED ("started"), 
-		 FAILED ("failed"), 
-		 COMPLETED ("completed");
+		 DISABLED 		("disabled"), 
+		 NOT_STARTED 	("not started"), 
+		 STARTED 		("started"), 
+		 FAILED 		("failed"), 
+		 COMPLETED 		("completed");
 
 		 private final String stateName;
 		 
@@ -34,16 +33,36 @@ public class WraithFile {
 		 }
 		 
 		 public static State fromString(String stateName) {
-		        for (State s : values() ){
-		            if (s.stateName.equals(stateName)) return s;
-		        }
-		        return State.DISABLED;
-		    }
+			 for (State s : values() ){
+				 if (s.stateName.equals(stateName)) return s;
+			 }
+			 return State.DISABLED;
+		 }
 	}
 	
 	public static enum FileType {
-		QUEST, CUTSCENE, CHARACTER
+		QUEST 		("quest"), 
+		CUTSCENE 	("cutscene"), 
+		CHARACTER 	("character");
+		
+		private final String fileType;
+		
+		FileType(String fileType) {
+			this.fileType = fileType;
+		}
+		
+		@Override
+		public String toString() {
+			return fileType;
+		}
+		public static FileType fromString(String fileType) {
+			for (FileType s : values() ){
+				if (s.fileType.equals(fileType)) return s;
+			}
+			return FileType.QUEST;
+		}
 	}
+	
 	private State 	state = State.NOT_STARTED;
 	private FileType	type = FileType.QUEST;
 	

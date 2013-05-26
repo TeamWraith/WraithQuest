@@ -1,6 +1,8 @@
 package net.teamwraith.wraithquest.gui.elements;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -61,6 +63,13 @@ public class MenuBar extends JMenuBar {
 			setForeground(color);
 		}
 		
+	}
+	
+	private class FileListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			
+		}
 	}
 
 }

@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import net.teamwraith.wraithquest.files.WraithFile.FileType;
-import net.teamwraith.wraithquest.files.WraithFile.State;
 import net.teamwraith.wraithquest.files.link.Character;
 import net.teamwraith.wraithquest.files.link.Cutscene;
 import net.teamwraith.wraithquest.files.link.Quest;
 import net.teamwraith.wraithquest.files.link.Task;
+import net.teamwraith.wraithquest.files.link.WraithFile;
+import net.teamwraith.wraithquest.files.link.WraithFile.FileType;
+import net.teamwraith.wraithquest.files.link.WraithFile.State;
 
 
 public class FileReader {
@@ -58,22 +59,40 @@ public class FileReader {
 	
 	public static WraithFile[] getWraithFileArray(State state) {
 		List<WraithFile> 	wraithFiles = new ArrayList<WraithFile>();
-		for (WraithFile file : getWraithFileArray()) {
-			if (file.getState() == state)
-				wraithFiles.add(file);
-		}
+
 		return wraithFiles.toArray(new WraithFile[wraithFiles.size()]);
 	}
 	
 	public static WraithFile[] getWraithFileArray(State state, FileType type) {
 		List<WraithFile> 	wraithFiles = new ArrayList<WraithFile>();
 		for (WraithFile file : getWraithFileArray(type)) {
-			if (file.getState() == state)
-				wraithFiles.add(file);
+			for (Task task : QuestReader.getTaskArray(file)) {
+				if ( task.getState() == state ) {
+					wraithFiles.add(file);
+					break;
+				}
+			}
 		}
 		return wraithFiles.toArray(new WraithFile[wraithFiles.size()]);
 	}
-
+	
+	/** Calls for all WraithFile based objects with all their tasks matching specific states.
+	 * 
+	 * @param type - Quest/Character/Cutscene.
+	 * @param states - Used for specifying what state you want quests to be checked for.
+	 * @return All WraithFiles/Quests/Objects that has all tasks matching with 'states'.
+	 */
+	public static WraithFile[] getFilledWraithFileArray(FileType type, State... states) {
+		List<WraithFile> 	wraithFiles = new ArrayList<WraithFile>();
+		for (WraithFile file : getWraithFileArray(type)) {
+			if (file.getTasks().length == 
+				QuestReader.getTaskArray(file, states).length) {
+				
+				wraithFiles.add(file);
+			}		
+		}
+		return wraithFiles.toArray(new WraithFile[wraithFiles.size()]);
+	}
 	
 	public static WraithFile readFile(File file) {
 		try {
@@ -104,11 +123,6 @@ public class FileReader {
 		
 		while (reader.hasNext()) {
 			String line = reader.nextLine();
-			
-			//TODO Add a Statecheck (add to filesyntax "state=").
-			if (line.startsWith("state=")) {
-				object.setState(State.fromString(line.substring(6).toLowerCase()));
-			}
 			
 			if (line.startsWith("name=")){
 				object.setName(line.substring(5));
@@ -153,11 +167,12 @@ public class FileReader {
 
 	private static Cutscene readCutscene(Cutscene object) {
 		object.setFileType(FileType.CUTSCENE);
+		State state = State.NOT_STARTED;
 		while (reader.hasNext()) {
 			String line = reader.nextLine();
 			
 			if (line.startsWith("state=")) {
-				object.setState(State.fromString(line.substring(6).toLowerCase()));
+				state = State.fromString(line.substring(6).toLowerCase());
 			}
 			
 			if (line.startsWith("name=")){
@@ -173,23 +188,20 @@ public class FileReader {
 			}
 		}
 		object.setTasks(new Task[] {
-				new Task(object ,object.getVideoLink(), object.getName(), object.getPassword(), object.getState()) 
+				new Task(object ,object.getVideoLink(), object.getName(), object.getPassword(), state)
 				});
 		
 		return object;
 	}
-
+	
 	private static Character readCharacter(Character object) {
 		object.setFileType(FileType.CHARACTER);
 		boolean hasMoreLinks = false;
 		List<Task> links = new ArrayList<Task>();
+		int sceneNr = 1;
 		
 		while (reader.hasNext()) {
 			String line = reader.nextLine();
-			int sceneNr = 0;
-			if (line.startsWith("state=")) {
-				object.setState(State.fromString(line.substring(6).toLowerCase()));
-			}
 			
 			if (line.startsWith("name=")){
 				object.setName(line.substring(5));
@@ -210,7 +222,6 @@ public class FileReader {
 			}
 
 			if (hasMoreLinks){
-				sceneNr++;
 				String[] params = line.split("#");
 				if (params.length < 1) {
 					try {
@@ -221,7 +232,7 @@ public class FileReader {
 						e.printStackTrace();
 					}
 				}
-				links.add(new Task(object, sceneNr, params[0],State.fromString(params[1]))); }
+				links.add(new Task(object, sceneNr++, params[0],State.fromString(params[1]))); }
 			}
 		return object;
 	}

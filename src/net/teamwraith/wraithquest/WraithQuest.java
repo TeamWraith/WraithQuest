@@ -21,7 +21,6 @@ public class WraithQuest {
 			public void run() {
 				try {
 					new GUIBuild();
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

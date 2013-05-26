@@ -8,10 +8,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import net.teamwraith.wraithquest.files.FileReader;
-import net.teamwraith.wraithquest.files.WraithFile.FileType;
-import net.teamwraith.wraithquest.files.WraithFile.State;
+import net.teamwraith.wraithquest.files.link.WraithFile.FileType;
+import net.teamwraith.wraithquest.files.link.WraithFile.State;
 import net.teamwraith.wraithquest.gui.elements.MenuBar;
 
+/**
+ * @author Halvor
+ *
+ */
 public class MainFrame extends JFrame {
 
 	private final String project = "Minecraft";
@@ -20,8 +24,8 @@ public class MainFrame extends JFrame {
 			GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice().getDisplayMode().getHeight()
 			);
 	
-	private ListPanel listPanel = new ListPanel();
-	private QuestPanel questPanel = new QuestPanel();
+	private static final ListPanel listPanel = new ListPanel();
+	private static final QuestPanel questPanel = new QuestPanel();
 	
 	/**
 	 * @param args
@@ -31,6 +35,7 @@ public class MainFrame extends JFrame {
 		getContentPane().add(listPanel, BorderLayout.WEST);
 		getContentPane().add(questPanel, BorderLayout.CENTER);
 		setListPanelActive();
+		setListPanelFinished();
 	}
 
 	private void init() {
@@ -44,13 +49,21 @@ public class MainFrame extends JFrame {
 		contentPane.setLayout(new BorderLayout());
 		setVisible(true);
 	}
-
+//TODO Move somewhere else and make it dyamically update when a quest is activated.
 	public void setListPanelActive() {
-		this.listPanel.setActiveQuests(FileReader.getWraithFileArray(State.STARTED, FileType.QUEST));
+		listPanel.setActiveQuests(FileReader.getWraithFileArray(State.STARTED, FileType.QUEST));
 	}
-	public void setListPanelFinished(ListPanel listPanel) {
-		this.listPanel.setFinishedQuests(FileReader.getWraithFileArray(State.COMPLETED, FileType.QUEST));
+	public void setListPanelFinished() {
+		listPanel.setFinishedQuests(
+				FileReader.getFilledWraithFileArray(FileType.QUEST, State.FAILED, State.COMPLETED));
 	}
 
 
+	public static ListPanel getListPanel() {
+		return listPanel;
+	}
+
+	public static QuestPanel getQuestPanel() {
+		return questPanel;
+	}
 }

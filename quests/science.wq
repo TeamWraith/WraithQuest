@@ -1,7 +1,6 @@
 type=quest
-state=started
 name=For Science!
 description=You've uncovered a strange area, the walls covered in metal...<p>You decide to explore, and find out what strange things have happened here. You can hear faint growls from ahead.<p><p><p>TEEEST<p><p>TESEStS
 tasks={
-http://youtu.be/epyF5BSdH2Y#Explore the strange facility.#science#not started
+http://youtu.be/epyF5BSdH2Y#Explore the strange facility.#science#started
 }

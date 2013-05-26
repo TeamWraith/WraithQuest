@@ -1,5 +1,4 @@
 package net.teamwraith.wraithquest.files.link;
-import net.teamwraith.wraithquest.files.WraithFile;
 
 public class Task extends Cutscene {
 	
